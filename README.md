@@ -9,7 +9,8 @@ This is just a demonstration project to show the capabilities of Universal.
 - Angular Material
 - Angular CDK (Virtual Scroll)
 
-Fake data comes primarily from [PokéAPI](http://pokeapi.co).
+Fake data comes primarily from [pokemon.json](https://github.com/fanzeyi/pokemon.json), which uses data from other sources (see the backend README).
+This project copies the files directly from the library instead of importing the library, just to use them to serve data and images via json-server more easily.
 
 ## Backend
 
