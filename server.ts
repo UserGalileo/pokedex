@@ -8,6 +8,15 @@ import { AppServerModule } from './src/main.server';
 import { APP_BASE_HREF } from '@angular/common';
 import { existsSync } from 'fs';
 
+// Domino
+const domino = require('domino');
+const fs = require('fs');
+const path = require('path');
+const template = fs.readFileSync(path.join(__dirname, '..', 'browser', 'index.html')).toString();
+const window = domino.createWindow(template);
+global['window'] = window;
+global['document'] = window.document;
+
 // The Express app is exported so that it can be used by serverless Functions.
 export function app() {
   const server = express();
