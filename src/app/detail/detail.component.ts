@@ -1,10 +1,8 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { Title, Meta } from '@angular/platform-browser';
-import { BehaviorSubject } from 'rxjs';
 import { map, switchMap } from 'rxjs/operators';
 import { PokemonService } from '../api/pokemon.service';
-import { Pokemon } from '../model/pokemon';
 
 @Component({
   selector: 'app-detail',
@@ -73,7 +71,9 @@ export class DetailComponent implements OnInit, OnDestroy {
     map(params => params.get('id'))
   );
 
-  detail$ = new BehaviorSubject<Pokemon>(null);
+  detail$ = this.id$.pipe(
+    switchMap(id => this.pkmnService.get(id))
+  );
 
   constructor(
     private pkmnService: PokemonService,
@@ -83,12 +83,9 @@ export class DetailComponent implements OnInit, OnDestroy {
   ) {}
 
   ngOnInit() {
-    this.id$.pipe(
-      switchMap(id => this.pkmnService.get(id)),
-    ).subscribe(pkmn => {
+    this.detail$.subscribe(pkmn => {
       this.title.setTitle(pkmn.name.english);
       this.meta.updateTag({ name: 'description', content: pkmn.name.english });
-      this.detail$.next(pkmn);
     });
   }
 
