@@ -8,11 +8,11 @@
     "test": "ng test",
     "lint": "ng lint",
     "e2e": "ng e2e",
-    "backend": "node ./backend/server.js",
+    "backend": "cd backend && node server.js",
     "dev:ssr": "ng run universal-pokedex:serve-ssr",
     "serve:ssr": "node dist/universal-pokedex/server/main.js",
     "build:ssr": "ng build --prod && ng run universal-pokedex:server:production",
-    "prerender": "ng run universal-pokedex:prerender"
+    "prerender": "ng run universal-pokedex:prerender --routesFile prerender-routes.txt"
   },
   "private": true,
   "dependencies": {
